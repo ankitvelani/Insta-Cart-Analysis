@@ -1,0 +1,73 @@
+
+### Most Ordered Products ###
+
+SELECT op.product_id, p.product_name, COUNT( op.product_id ) as TotalOrdered 
+FROM  `order_product` op
+LEFT JOIN products p ON p.product_id = op.product_id
+GROUP BY op.product_id
+ORDER BY COUNT( op.product_id ) DESC 
+LIMIT 1000
+################################################
+
+### Total Reordered Product
+
+SELECT  reordered , ReorderCount , round((ReorderCount/Total)*100,2) as Percentage
+FROM (
+
+SELECT reordered, COUNT( reordered ) AS ReorderCount
+FROM order_product
+GROUP BY reordered
+)Reorder 
+
+JOIN (
+
+SELECT COUNT( * ) AS Total
+FROM order_product
+
+) OrderProduct
+
+################################################
+
+
+### Most Re-Ordered Products ###
+
+  
+SELECT 
+
+op.product_id, product_name, count(reordered) as 'ReOrderTotal' , sum(reordered) as ReOrderSum   , sum(reordered)/count(reordered)*100 as ReorderProbability	
+
+FROM order_product op 
+LEFT JOIN products p ON p.product_id=op.product_id
+
+group by op.product_id
+
+having  ReOrderTotal > 75
+
+Order by ReorderProbability desc
+
+LIMIT 10 
+
+
+#######################################
+####### Most Important Department Product wise ########
+
+select  d.department,count(p.product_id) 'DeptCount'
+from products	p
+LEFT join departments d
+ON d.department_id = p.department_id
+GROUP by department
+ORDER BY DeptCount DESC
+
+#########################################
+
+
+### Department By Order #####
+select department , count(o.order_id) DepartmentByOrder from orders o 
+INNER JOIN order_product op ON o.order_id=op.order_id 
+LEFT JOIN products p ON p.product_id=op.product_id
+LEFT JOIN departments d ON d.department_id = p.department_id
+GROUP by department
+
+
+
+

@@ -1,0 +1,147 @@
+{% include "header.html" ignore missing %}
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Products
+        <small>Control panel</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Products</li>
+      </ol>
+    </section>
+ <!-- Main content -->
+    <section class="content">
+      <!-- Small boxes (Stat box) -->
+      <div class="row">
+      		 <section class="col-lg-6 connectedSortable">
+                <div class="box box-info">
+                    <div class="box-header">
+                      <h4 class="box-title">Most Frequent Ordered Products ?</h4>
+                    </div>
+                    <div class="box-body">
+                            
+
+
+                      <table class='table table-striped'>
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Total Reordered</th>
+                                    </tr>
+                                </thead>
+                             {% for key, value in data['MostFrequentProduct'].iterrows() %}
+                             
+                                <tr>
+                                    
+                                    <td> {{ value['product_name'] }} </td>
+                                    <td> {{ value['ProductCount'] }} </td>
+                                    
+                                </tr>
+                                
+                             {% endfor %}
+                          </table>
+                                       
+
+
+
+
+
+                    </div>
+                    <div class="box-footer clearfix">
+                   
+                    </div>
+                </div>
+      		 </section>
+
+
+
+      		 <section class="col-lg-6 connectedSortable">
+
+ <div class="box box-info">
+                    <div class="box-header">
+                      <h4 class="box-title">Most Frequent Ordered Products ?</h4>
+                    </div>
+                    <div class="box-body">
+                            
+
+
+                      <table class='table table-striped'>
+                                <thead>
+                                    <tr>
+                                        <th>Reordered</th>
+                                        <th>Count</th>
+                                        <th>%</th>
+                                    </tr>
+                                </thead>
+                             {% for key, value in data['ReorderedPercentage'].iterrows() %}
+                             
+                                <tr>
+                                    
+                                    <td> {{ value['reordered'] }} </td>
+                                    <td> {{ value['RorderFreq'] | int }} </td>
+                                    <td> {{ value['Percentage'] | round(2)}} </td>
+                                    
+                                </tr>
+                                
+                             {% endfor %}
+                          </table>
+                                       
+
+
+
+
+
+                    </div>
+                    <div class="box-footer clearfix">
+                   
+                    </div>
+                </div>
+
+
+
+<div class="box box-info">
+                    <div class="box-header">
+                      <h4 class="box-title">Most Frequent Ordered Products ?</h4>
+                    </div>
+                    <div class="box-body">
+                            
+
+
+                      <table class='table table-striped'>
+                                <thead>
+                                    <tr>
+                                        <th>Product ID</th>
+                                        <th>Product</th>
+                                        <th>Probability</th>
+                                    </tr>
+                                </thead>
+                             {% for key, value in data['ReorderedProbability'].iterrows() %}
+                             
+                                <tr>
+                                    
+                                    <td> {{ value['product_id'] }} </td>
+                                     <td> {{ value['product_name'] }} </td>
+                                    <td> {{ value['Probability'] | round(4) }} </td>
+                                    
+                                </tr>
+                                
+                             {% endfor %}
+                          </table>
+                                       
+
+
+
+
+
+                    </div>
+                    <div class="box-footer clearfix">
+                   
+                    </div>
+                </div>
+      		 </section>
+      </div>
+ </section>
+
+{% include 'footer.html' %}
